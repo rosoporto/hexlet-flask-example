@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Алексей Артемов",
+        "email": "praktikum.coder@yandex.ru"
+    },
+    {
+        "id": 2,
+        "name": "Alexey Ara",
+        "email": "mnogomest@vov.ru"
+    },
+    {
+        "id": 3,
+        "name": "Alexey Ara",
+        "email": "mnogomest@vov.ru"
+    },
+    {
+        "id": 4,
+        "name": "Алексей Артемов",
+        "email": "qwerty@gmail.ru"
+    }
+]

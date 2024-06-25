@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    
+    <form method="GET" action="/users/search">
+        <input type="text" required name="search" value="{{ search }}">
+        <button type="submit">Search</button>
+    </form>
+    
+    <table>
+        {% for user in found_users %}
+        <tr>      
+          <td>{{ user['id'] }}</td>
+          <td><a href="{{ url_for('get_users_id', id=user['id']) }} ">{{ user['first_name'] }}</a></td>    
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

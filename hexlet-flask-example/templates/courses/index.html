@@ -1,0 +1,18 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}Курсы{% endblock %}
+
+{% block content %}
+<table>
+     {% for course in courses %}
+     <tr>
+       <td>
+           {{ course.id }}
+       </td>
+       <td>
+           <a href="{{ url_for('get_course', id=course.id) }}">{{ course.name }}</a>
+       </td>
+     </tr>
+     {% endfor %}
+ </table>
+{% endblock %}

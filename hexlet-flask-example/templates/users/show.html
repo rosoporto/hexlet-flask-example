@@ -1,0 +1,49 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}All Users{% endblock %}
+
+{% block content %}
+    <h1>All Users</h1>
+    
+    <form method="GET" action="/users/search">
+        <input type="text" required name="search" value="{{ search }}" placeholder="Search by name">
+        <button type="submit">Search</button>
+    </form>
+    
+    <table>
+        {% for user in users %}
+        <tr>      
+            <td>{{ user['id'] }}</td>
+            <td><a href="{{ url_for('get_users_id', id=user['id']) }}">{{ user['first_name'] }}</a></td>     
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add new user</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="/users/new" method="post">
+        <div>
+            <label>Имя
+                <input type="text" name="name" value="{{ user['name'] }}">
+            </label>
+            {% if errors['name'] %}
+                <div>{{ errors['name'] }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label>Email
+                <input type="email" name="email" value="{{ user['email'] }}">
+            </label>
+            {% if errors['email'] %}
+                <div>{{ errors['email'] }}</div>
+            {% endif %}
+        </div>
+        <input type="submit" value="Sign Up">
+    </form>
+{% endblock %}

@@ -1,0 +1,9 @@
+<p><a href="/users">Пользователи</a></p>
+<table>    
+    <tr>
+        {% for key, value in user.items() %}
+        <div>
+          {{ key }}: {{ value }}
+        </div>
+      {% endfor %}   
+</table>
