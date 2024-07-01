@@ -1,0 +1,39 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}Корзина курсов{% endblock %}
+
+{% block content %}
+<form action="/add-courses" method="POST">
+    <input type="hidden" name="item_id" value="1">
+    <input type="hidden" name="item_name" value="One">
+    One
+    <input type="submit" value="Add">
+</form>
+
+<br>
+
+<form action="/add-courses" method="POST">
+    <input type="hidden" name="item_id" value="2">
+    <input type="hidden" name="item_name" value="Two">
+    Two
+    <input type="submit" value="Add">
+</form>
+
+<br>
+  
+<form action="/add-courses/clean" method="POST">
+    <input type="submit" value="Clean">
+</form>
+  <br>
+  
+  {% if cart | length == 0 %}
+    <div>Cart is empty</div>
+  {% else %}
+    {% for _, item in cart.items() %}
+      <div>
+        {{ item["name"] }}: {{ item["count"] }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}

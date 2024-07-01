@@ -6,7 +6,8 @@ from flask import (
     url_for,
     flash,
     g,
-    make_response
+    make_response,
+    json
 )
 from .scripts.validator import validator
 from .scripts.get_first_elem_in_obj import get_first_elem
@@ -143,6 +144,35 @@ def delete_user(id):
     else:
         flash(f'Failed to delete user with id {user_id}', 'error')
         return redirect(url_for('get_users_id', id=user_id))
+
+
+@app.route('/cart')
+def show_cart():
+    cart = json.loads(request.cookies.get('cart', json.dumps({})))
+    return render_template('courses/cart.html', cart=cart)
+
+   
+@app.post('/add-courses')
+def add_courses():
+    cart = json.loads(request.cookies.get('cart', json.dumps({})))
+    id_course = request.form['item_id']
+    name_course = request.form['item_name']
+
+    course = cart.setdefault(id_course, {'name': name_course, 'count': 0})
+    course['count'] += 1
+
+    encoding_cart = json.dumps(cart)
+    print(encoding_cart)
+    response = redirect('/cart')
+    response.set_cookie('cart', encoding_cart)
+    return response
+
+
+@app.post('/add-courses/clean')
+def clear_cart():
+    response = redirect('/cart')
+    response.delete_cookie('cart')
+    return response
 
 
 if __name__ == '__main__':
