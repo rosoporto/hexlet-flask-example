@@ -1,0 +1,19 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}Session Hall {% endblock %}
+
+{% block content %}
+<p><a href="/users">Пользователи</a></p>
+
+<table>    
+    <tr>
+        {% for key, value in users.items() %}
+        <div>
+          {{ key }}: {{ value }}
+        </div>
+      {% endfor %}
+      
+</table>
+
+
+{% endblock %}

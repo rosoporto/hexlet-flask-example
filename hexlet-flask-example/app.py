@@ -1,3 +1,4 @@
+import datetime
 from flask import (
     Flask,
     request,
@@ -7,7 +8,8 @@ from flask import (
     flash,
     g,
     make_response,
-    json
+    json,
+    session
 )
 from .scripts.validator import validator
 from .scripts.get_first_elem_in_obj import get_first_elem
@@ -18,14 +20,19 @@ from .scripts.read_write_json_file import (
     write_json_file
 )
 
+
 users_from_file = 'hexlet-flask-example/users.json'
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mdsgfmlkregipj56'
+app.permanent_session_lifetime = datetime.timedelta(days=365)
 
 
 @app.before_request
 def before_request():
     g.users = read_json_file(users_from_file)
+    if not session.modified:
+        session.modified = True
 
 
 def rewrite_base(data):
@@ -146,12 +153,13 @@ def delete_user(id):
         return redirect(url_for('get_users_id', id=user_id))
 
 
+# Work with cookie
 @app.route('/cart')
 def show_cart():
     cart = json.loads(request.cookies.get('cart', json.dumps({})))
     return render_template('courses/cart.html', cart=cart)
 
-   
+
 @app.post('/add-courses')
 def add_courses():
     cart = json.loads(request.cookies.get('cart', json.dumps({})))
@@ -173,6 +181,41 @@ def clear_cart():
     response = redirect('/cart')
     response.delete_cookie('cart')
     return response
+# End work with cookie
+
+
+# Work with session
+@app.route('/registration')
+def registration():
+    user = {}
+    errors = {}
+    return render_template(
+        'users/registration.html',
+        user=user,
+        errors=errors
+    )
+
+
+@app.post('/registration/new')
+def registration_new():
+    new_user = request.form.to_dict()
+    errors = validator(new_user)
+    if errors:
+        return render_template(
+            'users/registration.html',
+            user=new_user,
+            errors=errors), 422
+    session['users'] = new_user
+    flash('Success', 'success')
+    return redirect(url_for('session_hall'))
+
+
+@app.route('/session_hall')
+def session_hall():
+    if session.get('users') is None:
+        flash('Please register', 'success')
+        return redirect(url_for('registration'))
+    return render_template('users/session_hall.html', users=session['users'])
 
 
 if __name__ == '__main__':
