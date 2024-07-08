@@ -20,9 +20,9 @@ RUN poetry install --no-dev
 COPY hexlet-flask-example/app.py /hexlet-flask-example
 
 # Указываем порт, который будет открыт для взаимодействия с приложением
-EXPOSE 5000
+EXPOSE 8080
 
 # Указываем команду, которая будет выполняться при запуске контейнера
 # CMD ["poetry", "run", "python", "app.py"]
 # CMD ["poetry", "run", "gunicorn", "--workers=4", "--bind=0.0.0.0:8000", "app:app"]
-CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5000", "hexlet-flask-example:app"]
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:8080", "hexlet-flask-example:app"]
