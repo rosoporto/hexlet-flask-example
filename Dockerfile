@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /hexlet-flask-example
 
 # Копируем файлы зависимостей проекта
-COPY pyproject.toml poetry.lock /app/
+COPY pyproject.toml poetry.lock /hexlet-flask-example/
 
 # Устанавливаем Poetry
 RUN pip install poetry
