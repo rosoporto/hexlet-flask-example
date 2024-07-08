@@ -5,7 +5,7 @@ FROM python:3.10
 ENV PYTHONUNBUFFERED=1
 
 # Устанавливаем рабочую директорию внутри контейнера
-WORKDIR /app
+WORKDIR /hexlet-flask-example
 
 # Копируем файлы зависимостей проекта
 COPY pyproject.toml poetry.lock /app/
@@ -17,7 +17,7 @@ RUN pip install poetry
 RUN poetry install --no-dev
 
 # Копируем остальные файлы проекта
-COPY hexlet-flask-example/app.py /app
+COPY hexlet-flask-example/app.py /hexlet-flask-example
 
 # Указываем порт, который будет открыт для взаимодействия с приложением
 EXPOSE 5000
@@ -25,4 +25,4 @@ EXPOSE 5000
 # Указываем команду, которая будет выполняться при запуске контейнера
 # CMD ["poetry", "run", "python", "app.py"]
 # CMD ["poetry", "run", "gunicorn", "--workers=4", "--bind=0.0.0.0:8000", "app:app"]
-CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5000", "hexlet-flask-example:app"]
