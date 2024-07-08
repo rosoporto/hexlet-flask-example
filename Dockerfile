@@ -17,7 +17,7 @@ RUN pip install poetry
 RUN poetry install --no-dev
 
 # Копируем остальные файлы проекта
-COPY . /app
+COPY app.py /app
 
 # Указываем порт, который будет открыт для взаимодействия с приложением
 EXPOSE 5000
