@@ -17,7 +17,7 @@ RUN pip install poetry
 RUN poetry install --no-dev
 
 # Копируем остальные файлы проекта
-COPY app.py /app
+COPY hexlet-flask-example/app.py /app
 
 # Указываем порт, который будет открыт для взаимодействия с приложением
 EXPOSE 5000
