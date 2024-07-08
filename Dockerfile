@@ -23,6 +23,6 @@ COPY hexlet-flask-example/app.py /app
 EXPOSE 5000
 
 # Указываем команду, которая будет выполняться при запуске контейнера
+# CMD ["poetry", "run", "python", "app.py"]
 # CMD ["poetry", "run", "gunicorn", "--workers=4", "--bind=0.0.0.0:8000", "app:app"]
-
-CMD ["poetry", "run", "python", "app.py"]
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
