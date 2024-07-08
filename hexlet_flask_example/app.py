@@ -11,17 +11,17 @@ from flask import (
     json,
     session
 )
-from .scripts.validator import validator
-from .scripts.get_first_elem_in_obj import get_first_elem
-from .scripts.update_data_by_id import update_data_by_id
-from .scripts.delete_data_by_id import delete_data_by_id
-from .scripts.read_write_json_file import (
+from hexlet_flask_example.scripts.validator import validator
+from hexlet_flask_example.scripts.get_first_elem_in_obj import get_first_elem
+from hexlet_flask_example.scripts.update_data_by_id import update_data_by_id
+from hexlet_flask_example.scripts.delete_data_by_id import delete_data_by_id
+from hexlet_flask_example.scripts.read_write_json_file import (
     read_json_file,
     write_json_file
 )
 
 
-users_from_file = 'hexlet-flask-example/users.json'
+users_from_file = 'hexlet_flask_example/users.json'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mdsgfmlkregipj56'

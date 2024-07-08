@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "hexlet-flask-example"
+name = "hexlet_flask_example"
 version = "0.1.0"
 description = ""
 authors = ["rosoporto <rosoporto@yandex.ru>"]
 readme = "README.md"
-packages = [{ include = "hexlet-flask-example"}]
+packages = [{ include = "hexlet_flask_example"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
